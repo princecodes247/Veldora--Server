@@ -1,0 +1,26 @@
+{
+  "name": "veldora--server",
+  "version": "1.0.0",
+  "description": "The server code for the veldora project",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest",
+    "start": "node index.js",
+    "build": "npm run build:prod && npm run build:dev",
+    "build:prod": "webpack --config webpack.prod.js",
+    "build:dev": "webpack --config webpack.dev.js",
+    "lint": "eslint --ext .js,.jsx,.ts,.tsx src",
+    "lint:fix": "eslint --ext .js,.jsx,.ts,.tsx src --fix",
+    "dev": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/princecodes247/Veldora--Server.git"
+  },
+  "author": "Prince Codes",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/princecodes247/Veldora--Server/issues"
+  },
+  "homepage": "https://github.com/princecodes247/Veldora--Server#readme"
+}
