@@ -51,7 +51,7 @@ describe('Velora Authentication Tests', () => {
         // await db.user.deleteMany({});
     })
 
-    it('should create a new user account', async () => {
+    it.skip('should create a new user account', async () => {
         const response1 = await chai.request(server).post('/register').send(user23Prince)
         response1.should.have.status(201);
         delete response1.body.id;
