@@ -60,7 +60,7 @@ const deleteUser = (userID) => {
     return user.remove();
 };
 
-AuthController = {
+const UserController = {
   createUser,
   deleteUser,
   getAllUsers,
@@ -68,4 +68,4 @@ AuthController = {
   updateUserProjects,
 };
 
-module.exports = AuthController;
+module.exports = UserController;

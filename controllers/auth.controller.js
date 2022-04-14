@@ -1,4 +1,4 @@
-
+import { getUserByEmail } from './user.controller';
 
 const signIn = (details) => {
     const user = getUserByEmail(details.email);
