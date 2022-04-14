@@ -28,3 +28,13 @@ const updateUserProjects = (userID, data) => {
 const deleteUser = (userID) => {
 
 }
+
+AuthController = {
+    createUser,
+    deleteUser,
+    getAllUsers,
+    getUser,
+    updateUserProjects
+}
+
+module.exports = AuthController

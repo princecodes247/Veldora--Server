@@ -35,3 +35,11 @@ const saveToProject = (projectID, data) => {
 const deleteProject = (projectID) => {
 
 }
+
+module.exports = {
+    createProject,
+    deleteProject,
+    getProject,
+    getProjectsByUser,
+    saveToProject
+}
