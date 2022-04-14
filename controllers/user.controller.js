@@ -15,6 +15,19 @@ const getUser = (userID) => {
   return user;
 };
 
+// Get a single user from the database by email
+const getUserByEmail = (email) => {
+    const user = User.findOne({ email });
+    //   check if user exists
+    if (!user) {
+      return {
+        status: 404,
+        message: "User not found",
+      };
+    }
+    return user;
+  };
+
 // Get all users owned by a single user
 const getAllUsers = async () => {
   // Fetch all users
