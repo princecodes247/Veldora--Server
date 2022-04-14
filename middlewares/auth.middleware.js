@@ -1,0 +1,12 @@
+
+
+
+const isAuthenticated = ( ) => {
+
+}
+
+const isAdmin = ( ) => {
+
+}
+
+

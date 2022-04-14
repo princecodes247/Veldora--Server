@@ -44,7 +44,7 @@ describe('Velora Authentication Tests', () => {
     } 
 
     beforeEach(async () => {
-        // await Trades.sync();
+        
     })
 
     afterEach(async () => {

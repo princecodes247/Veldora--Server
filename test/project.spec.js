@@ -42,7 +42,7 @@ describe('Velora Project Tests', () => {
     } 
 
     beforeEach(async () => {
-        // await Trades.sync();
+        
     })
 
     afterEach(async () => {
@@ -67,7 +67,7 @@ describe('Velora Project Tests', () => {
     })
 
     it.skip('should fetch a single project if user is not authorised to view project', async () => {
-        // const [trade] = await setup(user23AAC);
+        // const [project] = await setup(user23AAC);
         const response = await chai.request(server).get(`/user/projects/${project.id}`)
         response.should.have.status(200);
         response.body.should.eql(project);
@@ -86,19 +86,19 @@ describe('Velora Project Tests', () => {
 
 
     it.skip('should delete a project if user is not authorised', async () => {
-        const [trade] = await setup(user23AAC);
+        const [project] = await setup(user23AAC);
         const response = await chai.request(server).delete(`/user/projects/${project.id}`)
         response.should.have.status(405);
     })
     
-    it.skip('should get 405 for a put request to /trades/:id', async () => {
-        const [trade] = await setup(user23AAC);
+    it.skip('should get 405 for a put request to /projects/:id', async () => {
+        const [project] = await setup(user23AAC);
         const response = await chai.request(server).put(`/user/projects/${project.id}`).send(user23ABX)
         response.should.have.status(405);
     })
 
-    it.skip('should get 405 for a patch request to /trades/:id', async () => {
-        const [trade] = await setup(user23AAC);
+    it.skip('should get 405 for a patch request to /projects/:id', async () => {
+        const [project] = await setup(user23AAC);
         const response = await chai.request(server).patch(`/user/projects/${project.id}`).send(user23ABX)
         response.should.have.status(405);
     })
