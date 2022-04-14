@@ -27,7 +27,7 @@ describe('Project Controller Test', async function(){
         
     })
 
-    it('Returns user with the given user ID', ()=> {
+    it('Returns project with the given project ID', ()=> {
         
     })
     
