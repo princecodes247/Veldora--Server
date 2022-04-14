@@ -5,7 +5,7 @@ const signIn = (details) => {
     if (user.status === 404) {
         return user;
     }
-    // Check if password is correct with passport authentication
+    // Check if password is correct 
     if (!user.authenticate(details.password)) {
         return {
             status: 401,
