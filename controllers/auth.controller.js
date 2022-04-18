@@ -1,7 +1,7 @@
 import { getUserByEmail } from './user.controller';
 
-const signIn = (details) => {
-    const user = getUserByEmail(details.email);
+const signIn = async (details) => {
+    const user = await getUserByEmail(details.email);
     if (user.status === 404) {
         return user;
     }
