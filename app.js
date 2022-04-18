@@ -19,7 +19,7 @@ app.use(express.urlencoded({ extended: false }));
 // app.use('/auth', authRouter);
 // app.use('/admin', authRouter);
 // app.use('/project', authRouter);
-// app.use('/user', authRouter);
+app.use('/api/user', userRouter);
 app.use('/', indexRouter);
 
 module.exports = app;
