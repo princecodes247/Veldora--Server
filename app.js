@@ -4,6 +4,13 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const logger = require('morgan');
 
+// DB Config
+// const db = require('./config/keys').mongoURI;
+const connect = require('./config/dbConnection');
+connect();
+
+
+
 // Route imports
 const indexRouter = require('./routes/index');
 const adminRouter = require('./routes/admin');
