@@ -1,1 +1,6 @@
 node_modules
+
+# Enviroment Variables
+.env
+.env.dev
+.env.local
