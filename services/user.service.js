@@ -150,3 +150,7 @@ const UserService = {
 };
 
 module.exports = UserService;
+
+
+// TODO: Implement the following functions:
+// skip and limit on all projects function
