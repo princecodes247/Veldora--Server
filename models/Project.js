@@ -18,11 +18,11 @@ const ProjectSchema = new Schema({
         type: String,
         default: "user",
     },
-    collection: {
+    store: {
         type: Array,
         default: [],
     },
-    collectionSchema: {
+    storeSchema: {
         type: Object,
         required: true,
     },
