@@ -2,10 +2,6 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const UserSchema = new Schema({
-    user_id: {
-        type: String,
-        //required: true,
-    },
     userName: {
         type: String,
         required: true,
@@ -23,6 +19,10 @@ const UserSchema = new Schema({
         type: String,
         default: "",
         required: false,
+    },
+    projects: {
+        type: Array,
+        default: []
     },
     accountType: {
         type: String,

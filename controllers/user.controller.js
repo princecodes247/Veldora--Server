@@ -20,14 +20,15 @@ const getUserByEmail = async (req, res) => {
 
 const createUser = async (req, res) => {
     let { userName, email, password } = req.body
-    let result = await UserService.createUser(details)
-    res.status(result.status).json(result)
+
+    let result = await UserService.createUser({userName, email, password})
+    res.status(result.status).json(result.message)
 }
 
 const deleteUser = async (req, res) => {
-    let { userID } = req.body
+    let { userID } = req.params
     let result = await UserService.deleteUser(userID)
-    res.status(result.status).json(result)
+    res.status(result.status).json(result.message)
 }
 
 const updateUserProjects = async (req, res) => {

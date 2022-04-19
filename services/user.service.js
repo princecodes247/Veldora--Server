@@ -122,21 +122,20 @@ const updateUserProjects = async (userID, data) => {
 // Delete a single user
 const deleteUser = async (userID) => {
   try {
-    const user = await getUser(userID);
-    if (user.status === 404) {
-      return user;
-    }
-    await user.remove();
+    const user = await User.deleteOne({_id: userID});
+    console.log(user)
     return {
       status: 200,
       error: false,
       message: "User deleted",
+      count: user.deletedCount
     };
   } catch (error) {
     return {
       status: 500,
       error: true,
       message: "Internal server error",
+      details: error
     };
   }
 };
