@@ -19,7 +19,7 @@ const getUserByEmail = async (req, res) => {
 }
 
 const createUser = async (req, res) => {
-    let { details } = req.body
+    let { userName, email, password } = req.body
     let result = await UserService.createUser(details)
     res.status(result.status).json(result)
 }
