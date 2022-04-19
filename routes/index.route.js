@@ -6,4 +6,11 @@ router.get('/', function(req, res, next) {
   res.send('<p>Who forms the forms...</p>');
 });
 
+// Temporary route to test email functionality
+const sendEmail = require('../utils/sendEmail')
+router.get('/', function(req, res, next) {
+  sendEmail('princecodes247@gmail.com', 'Hello', 'Hello World')
+  res.send('sent!!!');
+});
+
 module.exports = router;
