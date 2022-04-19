@@ -13,14 +13,24 @@ const getProject = async (req, res) => {
 }
 
 const createProject = async (req, res) => {
-    let { details } = req.body
-    let result = await ProjectService.createProject(details)
+    let { 
+        collectionSchema,
+        projectDesc,
+        projectName,
+        projectTag,
+        projectType,
+        userID,
+      } = req.body
+    
+
+
+    // let result = await ProjectService.createProject(details)
     res.status(result.status).json(result)
 }
 
 const deleteProject = async (req, res) => {
     let { userID } = req.body
-    let result = await ProjectService.createProject(userID)
+    // let result = await ProjectService.createProject(userID)
     res.status(result.status).json(result)
 }
 
