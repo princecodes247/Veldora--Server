@@ -3,6 +3,7 @@ const app = express();
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const logger = require('morgan');
+require('dotenv').config()
 
 // DB Config
 // const db = require('./config/keys').mongoURI;
