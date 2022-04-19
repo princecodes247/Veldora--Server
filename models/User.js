@@ -16,11 +16,13 @@ const UserSchema = new Schema({
     },
     phone: {
         type: String,
+        default: "",
         required: false,
     },
     country: {
         type: String,
-        required: true,
+        default: "",
+        required: false,
     },
     accountType: {
         type: String,
