@@ -1,10 +1,10 @@
 const express = require('express');
 const router = express.Router();
-const UserController = require("../controllers/user.controller")
+const ProjectController = require("../controllers/project.controller")
 
-router.get('/getAllUsers', UserController.getAllUsers);
-router.get('/getUser/:projectID', UserController.getUser);
-// router.get('/createUser',   UserController.createUser);
-// router.get('/deleteUser',   UserController.deleteUser);
+router.get('/getAllProjects', ProjectController.getAllProjects);
+router.get('/getProject/:projectID', ProjectController.getProject);
+router.get('/createProject',   ProjectController.createProject);
+router.get('/deleteProject',   ProjectController.deleteProject);
 
 module.exports = router;

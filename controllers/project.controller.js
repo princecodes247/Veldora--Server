@@ -22,15 +22,15 @@ const createProject = async (req, res) => {
         userID,
       } = req.body
     
+      
 
-
-    // let result = await ProjectService.createProject(details)
+    let result = await ProjectService.createProject(details)
     res.status(result.status).json(result)
 }
 
 const deleteProject = async (req, res) => {
     let { userID } = req.body
-    // let result = await ProjectService.createProject(userID)
+    let result = await ProjectService.createProject(userID)
     res.status(result.status).json(result)
 }
 
