@@ -22,13 +22,13 @@ const createUser = async (req, res) => {
     let { userName, email, password } = req.body
 
     let result = await UserService.createUser({userName, email, password})
-    res.status(result.status).json(result.message)
+    res.status(result.status).json(result)
 }
 
 const deleteUser = async (req, res) => {
     let { userID } = req.params
     let result = await UserService.deleteUser(userID)
-    res.status(result.status).json(result.message)
+    res.status(result.status).json(result)
 }
 
 const updateUserProjects = async (req, res) => {
