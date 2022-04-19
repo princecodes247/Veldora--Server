@@ -22,3 +22,11 @@ passport.use(new LocalStategy({
     }
     return done(null, user);
 }))
+
+passport.serializeUser(function(user, cb) {
+    cb(null, user);
+  });
+  
+  passport.deserializeUser(function(obj, cb) {
+    cb(null, obj);
+  });
