@@ -6,6 +6,20 @@ const getAllUsers = async (req, res) => {
     res.status(result.status).json(result)
 }
 
-module.exports = {
-    getAllUsers
+const getUser = async (req, res) => {
+    let { userID } = req.body
+    let result = await UserService.getUser()
+    res.status(result.status).json(result)
 }
+
+const createUser = async (req, res) => {
+
+}
+
+const UserController = {
+    getAllUsers,
+    getUser
+}
+
+
+module.exports = UserController
