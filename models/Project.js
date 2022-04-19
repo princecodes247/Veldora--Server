@@ -18,12 +18,12 @@ const ProjectSchema = new Schema({
         type: String,
         default: "user",
     },
-    storage: {
-        type: String,
-        required: true,
+    collection: {
+        type: Array,
+        default: [],
     },
-    storageSchema: {
-        type: String,
+    collectionSchema: {
+        type: Object,
         required: true,
     },
     projectType: {
