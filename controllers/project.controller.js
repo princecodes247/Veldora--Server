@@ -30,6 +30,11 @@ const addEntryToProject = async (req, res) => {
     res.status(result.status).json(result)
 }
 
+const quickSave = async (req, res) => {
+    // Get email from req.body
+    let { email, data } = req.body
+}
+
 const ProjectController = {
     addEntryToProject,
     createProject,
