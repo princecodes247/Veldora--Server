@@ -24,7 +24,14 @@ const createProject = async (req, res) => {
     
       
 
-    let result = await ProjectService.createProject(details)
+    let result = await ProjectService.createProject({
+        collectionSchema,
+        projectDesc,
+        projectName,
+        projectTag,
+        projectType,
+        userID,
+    })
     res.status(result.status).json(result)
 }
 

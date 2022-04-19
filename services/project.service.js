@@ -62,6 +62,7 @@ const addEntry = (projectID, data) => {
     if (project.status === 404) {
         return project;
     }
+    let keys = project.storeSchema.keys()
     project.collection = project.collection.push(data);
     return project.save();
 }

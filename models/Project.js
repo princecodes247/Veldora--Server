@@ -30,6 +30,10 @@ const ProjectSchema = new Schema({
         type: String,
         default: "user",
     },
+    ownerID: {
+        required: true,
+        type: String
+    }
 }, { timestamps: true});
 
 const Project = mongoose.model('Project', ProjectSchema);
