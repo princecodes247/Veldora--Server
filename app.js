@@ -12,11 +12,11 @@ connect();
 
 
 // Route imports
-const indexRouter = require('./routes/index');
-const adminRouter = require('./routes/admin');
-const authRouter = require('./routes/auth');
-const projectRouter = require('./routes/project');
-const userRouter = require('./routes/user');
+const indexRouter = require('./routes/index.route');
+const adminRouter = require('./routes/admin.route');
+const authRouter = require('./routes/auth.route');
+const projectRouter = require('./routes/project.route');
+const userRouter = require('./routes/user.route');
 
 
 app.use(logger('dev'));
