@@ -1,70 +1,42 @@
-const Project = require("../models/Project");
+const ProjectService = require('../services/project.service')
 
-// ------ Fetch Controllers -------------
-// Get a single project from the database
-const getProject = (projectTag) => {
-    const project = Project.findById(projectTag);
-    //   check if project exists
-    if (!project) {
-        return {
-            status: 404,
-            message: "Project not found",
-        };
-    }
-    return project;
+const getAllProjects = async (req, res) => {
+    console.log("hit")
+    let result = await ProjectService.getAllProjects()
+    res.status(result.status).json(result)
 }
 
-const getProjectByTag = (projectTag) => {
-    const project = Project.find(projectTag);
-    //   check if project exists
-    if (!project) {
-        return {
-            status: 404,
-            message: "Project not found",
-        };
-    }
-    return project;
+const getProject = async (req, res) => {
+    let { userID } = req.body
+    let result = await ProjectService.getProject(userID)
+    res.status(result.status).json(result)
 }
 
-// Get all projects owned by a single user
-const getProjectsByUser = (userID) => {
-    // Fetch all projects by a single user
-    const allProjects = Project.find(userID);
-    return allProjects;
-    
-}
-// --------------------------------------
-
-
-// Create a new project
-const createProject = (details) => {
-    const project = new Project(details);
-    return project.save();
+const createProject = async (req, res) => {
+    let { details } = req.body
+    let result = await ProjectService.createProject(details)
+    res.status(result.status).json(result)
 }
 
-// Add data to project
-const saveToProject = (projectID, data) => {
-    const project = getProject(projectID);
-    if (project.status === 404) {
-        return project;
-    }
-    project.data = data;
-    return project.save();
+const deleteProject = async (req, res) => {
+    let { userID } = req.body
+    let result = await ProjectService.createProject(userID)
+    res.status(result.status).json(result)
 }
 
-// Delete a single project 
-const deleteProject = (projectID) => {
-    const project = getProject(projectID);
-    if (project.status === 404) {
-        return project;
-    }
-    return project.remove();
+const addEntryToProject = async (req, res) => {
+    let { userID, data } = req.body
+    let result = await ProjectService.addEntry(userID, data)
+    res.status(result.status).json(result)
 }
 
-module.exports = {
+const ProjectController = {
+    addEntryToProject,
     createProject,
     deleteProject,
+    getAllProjects,
     getProject,
-    getProjectsByUser,
-    saveToProject
 }
+
+
+module.exports = ProjectController
