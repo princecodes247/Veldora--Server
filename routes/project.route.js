@@ -1,9 +1,10 @@
 const express = require('express');
 const router = express.Router();
+const UserController = require("../controllers/user.controller")
 
-/* GET home page. */
-router.get('/:projectID', function(req, res, next) {
-  let projectID = req.params.projectID;
-});
+router.get('/getAllUsers', UserController.getAllUsers);
+router.get('/getUser/:projectID', UserController.getUser);
+// router.get('/createUser',   UserController.createUser);
+// router.get('/deleteUser',   UserController.deleteUser);
 
 module.exports = router;
