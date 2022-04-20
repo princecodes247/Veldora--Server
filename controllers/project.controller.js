@@ -1,4 +1,5 @@
 const ProjectService = require('../services/project.service')
+const { getUser, updateUserProjects } = require('../services/user.service')
 
 const getAllProjects = async (req, res) => {
     console.log("hit")
@@ -14,24 +15,48 @@ const getProject = async (req, res) => {
 
 const createProject = async (req, res) => {
     let { 
-        collectionSchema,
+        storeSchema,
         projectDesc,
         projectName,
         projectTag,
         projectType,
         userID,
       } = req.body
-    
       
+    //   Check
+    if (!storeSchema || !projectDesc || !projectName || !projectTag || !projectType || !userID) {
+        return res.status(400).json({
+            status: 400,
+            message: "Please provide all required fields",
+        });
+    }
+
+    // Trim inputs
+    // storeSchema = storeSchema.trim()
+    projectDesc = projectDesc.trim()
+    projectName = projectName.trim()
+    projectTag = projectTag.trim()
+    // projectType = projectType.trim()
+    userID = userID.trim()
+
+
+    let owner = await getUser(userID);
+    if (owner.status === 404) {
+        return {
+            status: 404,
+            message: "User not found",
+        };
+    }
 
     let result = await ProjectService.createProject({
-        collectionSchema,
+        storeSchema,
         projectDesc,
         projectName,
         projectTag,
         projectType,
-        userID,
+        ownerID: userID,
     })
+    await updateUserProjects(userID, [...owner.data.projects, result.projectTag])
     res.status(result.status).json(result)
 }
 

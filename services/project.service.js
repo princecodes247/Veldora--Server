@@ -1,9 +1,12 @@
 const Project = require("../models/Project");
 
-
-const getAllProjects = async (req, res) => {
+const getAllProjects = async () => {
     const allProjects = await Project.find();
-    res.status(200).json(allProjects);
+    return {
+        status: 200,
+        message: "All projects found",
+        projects: allProjects,
+    };
 }
 
 // Get a single project from the database
@@ -42,9 +45,16 @@ const getProjectsByUser = (userID) => {
 
 
 // Create a new project
-const createProject = (details) => {
+const createProject = async (details) => {
     const project = new Project(details);
-    return project.save();
+
+    await project.save();
+    
+    return {
+        status: 200,
+        message: "Project created successfully",
+        project,
+    };
 }
 
 // Delete a single project 
