@@ -31,19 +31,12 @@ const deleteUser = async (req, res) => {
     res.status(result.status).json(result)
 }
 
-const updateUserProjects = async (req, res) => {
-    let { userID, data } = req.body
-    let result = await UserService.updateUserProjects(userID, data)
-    res.status(result.status).json(result)
-}
-
 const UserController = {
     createUser,
     deleteUser,
     getAllUsers,
     getUser,
-    getUserByEmail,
-    updateUserProjects
+    getUserByEmail
 }
 
 
