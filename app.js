@@ -26,7 +26,7 @@ app.use(express.urlencoded({ extended: false }));
 
 // app.use('/auth', authRouter);
 // app.use('/admin', adminRouter);
-app.use('/api/project', projectRouter);
+app.use('/api/projects', projectRouter);
 app.use('/api/users', userRouter);
 app.use('/api/*', indexRouter);
 app.use('/', indexRouter);
