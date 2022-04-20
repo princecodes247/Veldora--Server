@@ -23,7 +23,7 @@ const ProjectSchema = new Schema({
         default: [],
     },
     storeSchema: {
-        type: Object,
+        type: Array,
         required: true,
     },
     projectType: {

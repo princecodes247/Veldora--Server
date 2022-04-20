@@ -57,23 +57,41 @@ const deleteProject = (projectID) => {
 }
 
 // Add data to project
-const addEntry = (projectID, data) => {
+const addEntry = async (projectID, data) => {
     const project = getProject(projectID);
     if (project.status === 404) {
         return project;
     }
-    let keys = project.storeSchema.keys()
-    project.collection = project.collection.push(data);
-    return project.save();
+    // Check entry details match the project storeSchema
+    let rightLength = storeSchema.length;
+    let length = new Set([...storeSchema, ...Object.keys(data)]);
+    if (length.size !== rightLength) {
+        return {
+            status: 400,
+            message: "Entry details do not match the project storeSchema",
+        };
+    }
+    project.store.push(data);
+    await project.save();
+    return {
+        status: 200,
+        message: "Entry added to project",
+        store: project.store,
+    };
 }
 
-const deleteEntry = (projectID, entryID) => {
+const deleteEntry = async (projectID, entryID) => {
     const project = getProject(projectID);
     if (project.status === 404) {
         return project;
     }
-    project.collection = project.collection.filter(entry => entry._id !== entryID);
-    return project.save();
+    project.store = project.store.filter(entry => entry._id !== entryID);
+    await project.save();
+    return {
+        status: 200,
+        message: "Entry deleted from project",
+        store: project.store,
+    };
 }
 
 module.exports = {
