@@ -86,8 +86,8 @@ const deleteProject = async (req, res) => {
 }
 
 const addEntryToProject = async (req, res) => {
-    let { userID, data } = req.body
-    let result = await ProjectService.addEntry(userID, data)
+    let { projectTag, data } = req.body
+    let result = await ProjectService.addEntry(projectTag, data)
     res.status(result.status).json(result)
 }
 

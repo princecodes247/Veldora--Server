@@ -22,8 +22,8 @@ const getProject = (projectTag) => {
     return project;
 }
 
-const getProjectByTag = (projectTag) => {
-    const project = Project.find({projectTag});
+const getProjectByTag = async (projectTag) => {
+    const project = await Project.findOne({projectTag});
     //   check if project exists
     if (!project) {
         return {
@@ -31,7 +31,11 @@ const getProjectByTag = (projectTag) => {
             message: "Project not found",
         };
     }
-    return project;
+    return {
+        status: 200,
+        message: "Project Found",
+        data: project
+    };
 }
 
 const isProjectTagTaken = async (projectTag) => {
@@ -80,14 +84,15 @@ const deleteProject = async (projectTag) => {
 }
 
 // Add data to project
-const addEntry = async (projectID, data) => {
-    const project = getProject(projectID);
-    if (project.status === 404) {
+const addEntry = async (projectTag, data) => {
+    const res = await getProjectByTag(projectTag);
+    if (res.status === 404) {
         return project;
     }
     // Check entry details match the project storeSchema
-    let rightLength = storeSchema.length;
-    let length = new Set([...storeSchema, ...Object.keys(data)]);
+    let project = res.data
+    let rightLength = project.storeSchema.length;
+    let length = new Set([...project.storeSchema, ...Object.keys(data)]);
     if (length.size !== rightLength) {
         return {
             status: 400,
