@@ -23,7 +23,7 @@ const getProject = (projectTag) => {
 }
 
 const getProjectByTag = (projectTag) => {
-    const project = Project.find(projectTag);
+    const project = Project.find({projectTag});
     //   check if project exists
     if (!project) {
         return {
@@ -32,6 +32,14 @@ const getProjectByTag = (projectTag) => {
         };
     }
     return project;
+}
+
+const isProjectTagTaken = async (projectTag) => {
+    await getProjectByTag(projectTag)
+    if (res.error) {
+        return false
+    }
+    return true
 }
 
 // Get all projects owned by a single user
@@ -58,12 +66,17 @@ const createProject = async (details) => {
 }
 
 // Delete a single project 
-const deleteProject = (projectID) => {
-    const project = getProject(projectID);
+const deleteProject = async (projectTag) => {
+    const project = getProjectByTag(projectTag);
     if (project.status === 404) {
         return project;
     }
-    return project.remove();
+    await project.remove();
+
+    return {
+        status: 200,
+        message: "Project deleted",
+    }
 }
 
 // Add data to project
@@ -111,4 +124,5 @@ module.exports = {
     getAllProjects,
     getProject,
     getProjectsByUser,
+    isProjectTagTaken,
 }

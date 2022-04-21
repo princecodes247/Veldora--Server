@@ -13,6 +13,20 @@ const getProject = async (req, res) => {
     res.status(result.status).json(result)
 }
 
+const checkProjectTag = async (req, res) => {
+    let { projectTag } = req.body;
+    let isProjectTagTaken = await ProjectService.isProjectTagTaken(projectTag)
+    if (condition) {
+        res.status(200).json({
+            
+        })
+    } else {
+        res.status(200).json({
+            
+        })
+    }
+}
+
 const createProject = async (req, res) => {
     let { 
         storeSchema,
@@ -56,7 +70,11 @@ const createProject = async (req, res) => {
         projectType,
         ownerID: userID,
     })
-    let updateRes = await updateUserProjects(userID, [...owner.data.projects, result.data.projectTag])
+    if (result.status === 200) {
+        let updateRes = await updateUserProjects(userID, [...owner.data.projects, result.data.projectTag])
+    } else {
+
+    }
     console.log(updateRes)
     res.status(result.status).json(result)
 }
