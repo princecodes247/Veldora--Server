@@ -53,7 +53,7 @@ const createProject = async (details) => {
     return {
         status: 200,
         message: "Project created successfully",
-        project,
+        data: project,
     };
 }
 

@@ -99,10 +99,11 @@ const createUser = async (details) => {
 // Add data to user
 const updateUserProjects = async (userID, data) => {
   try {
-    const user = await getUser(userID);
-    if (user.status === 404) return user;
+    const res = await getUser(userID);
+    if (res.status === 404) return res;
 
-    user.projects = data;
+    res.data.projects = data;
+    let user = res.data
     await user.save();
 
     return {
@@ -115,6 +116,7 @@ const updateUserProjects = async (userID, data) => {
       status: 500,
       error: true,
       message: "Internal server error",
+      data: error
     };
   }
 };

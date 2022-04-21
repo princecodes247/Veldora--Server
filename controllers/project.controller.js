@@ -56,7 +56,8 @@ const createProject = async (req, res) => {
         projectType,
         ownerID: userID,
     })
-    await updateUserProjects(userID, [...owner.data.projects, result.projectTag])
+    let updateRes = await updateUserProjects(userID, [...owner.data.projects, result.data.projectTag])
+    console.log(updateRes)
     res.status(result.status).json(result)
 }
 
