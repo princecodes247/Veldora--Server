@@ -29,20 +29,6 @@ const createProject = async (req, res) => {
     userID,
   } = req.body;
 
-  //   Check
-  if (
-    !storeSchema ||
-    !projectDesc.trim() ||
-    !projectName.trim() ||
-    !projectTag.trim() ||
-    !projectType ||
-    !userID.trim()
-  ) {
-    return res.status(400).json({
-      status: 400,
-      message: "Please provide all required fields",
-    });
-  }
 
   // Trim inputs
   // storeSchema = storeSchema.trim()
@@ -51,6 +37,23 @@ const createProject = async (req, res) => {
   projectTag = projectTag.trim();
   // projectType = projectType.trim()
   userID = userID.trim();
+
+  //   Check
+  if (
+    !storeSchema ||
+    !projectDesc ||
+    !projectName ||
+    !projectTag ||
+    !projectType ||
+    !userID
+  ) {
+    return res.status(400).json({
+      status: 400,
+      message: "Please provide all required fields",
+    });
+  }
+
+
 
   let owner = await getUser(userID);
   if (owner.status === 404) return { status: 404, message: "User not found" };
@@ -101,6 +104,7 @@ const quickSave = async (req, res) => {
 
 const ProjectController = {
   addEntryToProject,
+  checkProjectTag,
   createProject,
   deleteProject,
   getAllProjects,
