@@ -1,9 +1,9 @@
-const canWriteToProject = ( ) => {
-
+const canWriteToProject = (req, res, next) => {
+    next()
 }
 
-const canReadProject = ( ) => {
-
+const canReadProject = (req, res, next) => {
+    next()
 }
 
 const ProjectMiddleware = {
