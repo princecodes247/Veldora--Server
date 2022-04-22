@@ -1,4 +1,4 @@
-const canWriteProject = ( ) => {
+const canWriteToProject = ( ) => {
 
 }
 
@@ -6,7 +6,9 @@ const canReadProject = ( ) => {
 
 }
 
-module.exports = {
-    canReadProject,
-    canWriteProject
-}
+const ProjectMiddleware = {
+    canWriteToProject,
+    canReadProject
+};
+
+module.exports = ProjectMiddleware;
