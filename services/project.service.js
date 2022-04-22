@@ -5,12 +5,13 @@ const getAllProjects = async () => {
     const allProjects = await Project.find();
     return {
       status: 200,
-      message: "Projects found"
+      message: "Projects found",
       data: allProjects,
     };
   } catch (error) {
     return {
       status: 500,
+      message: "An error occured",
       data: error,
     };
   }
@@ -25,17 +26,20 @@ const getProject = (projectTag) => {
     //   check if project exists
     if (!project) {
       return {
-        error: true,
+        status: 404,
+        message: "Projects found",
         data: null,
       };
     }
     return {
       status: 200,
+      message: "Project found",
       data: project,
     };
   } catch (error) {
     return {
       status: 500,
+      message: "An error occured",
       data: error,
     };
   }
@@ -60,6 +64,7 @@ const getProjectByTag = async (projectTag) => {
   } catch (error) {
     return {
       status: 500,
+      message: "An error occured",
       data: error,
     };
   }
@@ -79,6 +84,7 @@ const isProjectTagTaken = async (projectTag, username) => {
   } catch (error) {
     return {
       status: 500,
+      message: "An error occured",
       data: error,
     };
   }
@@ -94,6 +100,7 @@ const getProjectsByUser = (userID) => {
   } catch (error) {
     return {
       status: 500,
+      message: "An error occured",
       data: error,
     };
   }
@@ -114,6 +121,7 @@ const createProject = async (details) => {
   } catch (error) {
     return {
       status: 500,
+      message: "An error occured",
       data: error,
     };
   }
@@ -128,7 +136,7 @@ const deleteProject = async (projectTag) => {
   await project.remove();
 
   return {
-    error: false
+    error: false,
     message: "Project deleted",
   };
 };
