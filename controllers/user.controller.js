@@ -20,9 +20,11 @@ const getUserByEmail = async (req, res) => {
 
 const createUser = async (req, res) => {
   let { userName, email, password } = req.body;
-
+  password = password.trim()
+  userName = userName.trim()
+  email = email.trim()
   // Check
-  if (!userName.trim() || !email.trim() || !password.trim()) {
+  if (!userName || !email || !password) {
     return res.status(400).json({
       status: 400,
       message: "Please provide all required fields",
