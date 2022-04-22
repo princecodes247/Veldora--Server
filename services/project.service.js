@@ -160,7 +160,7 @@ const deleteProject = async (projectTag) => {
 const addEntry = async (projectTag, data) => {
   const res = await getProjectByTag(projectTag);
   if (res.status === 404) return project;
-  
+
   // Check entry details match the project storeSchema
   let project = res.data;
   let rightLength = project.storeSchema.length;
@@ -176,21 +176,20 @@ const addEntry = async (projectTag, data) => {
   return {
     status: 200,
     message: "Entry added to project",
-    store: project.store,
+    data: project.store,
   };
 };
 
 const deleteEntry = async (projectID, entryID) => {
   const project = getProject(projectID);
-  if (project.status === 404) {
-    return project;
-  }
+  if (project.status === 404) return project;
+
   project.store = project.store.filter((entry) => entry._id !== entryID);
   await project.save();
   return {
     status: 200,
     message: "Entry deleted from project",
-    store: project.store,
+    data: project.store,
   };
 };
 
