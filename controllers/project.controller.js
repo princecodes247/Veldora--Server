@@ -15,16 +15,8 @@ const getProject = async (req, res) => {
 
 const checkProjectTag = async (req, res) => {
     let { projectTag } = req.body;
-    let isProjectTagTaken = await ProjectService.isProjectTagTaken(projectTag)
-    if (condition) {
-        res.status(200).json({
-            
-        })
-    } else {
-        res.status(200).json({
-            
-        })
-    }
+    let result = await ProjectService.isProjectTagTaken(projectTag)
+    res.status(result.status).json(result)
 }
 
 const createProject = async (req, res) => {
@@ -55,12 +47,7 @@ const createProject = async (req, res) => {
 
 
     let owner = await getUser(userID);
-    if (owner.status === 404) {
-        return {
-            status: 404,
-            message: "User not found",
-        };
-    }
+    if (owner.status === 404) return { status: 404, message: "User not found", };
 
     let result = await ProjectService.createProject({
         storeSchema,
@@ -72,16 +59,23 @@ const createProject = async (req, res) => {
     })
     if (result.status === 200) {
         let updateRes = await updateUserProjects(userID, [...owner.data.projects, result.data.projectTag])
+        if (!updatRes.status === 500) {
+            await ProjectService.deleteProject(result.data.projectTag)
+            res.status(500).json({
+                status: 500,
+                message: "Couldn't update user projects"
+            })
+        }
     } else {
-
+        res.status(result.status).json(result)
     }
     console.log(updateRes)
     res.status(result.status).json(result)
 }
 
 const deleteProject = async (req, res) => {
-    let { userID } = req.body
-    let result = await ProjectService.createProject(userID)
+    let { projectTag } = req.body
+    let result = await ProjectService.deleteProject(projectTag)
     res.status(result.status).json(result)
 }
 
