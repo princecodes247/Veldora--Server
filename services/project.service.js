@@ -3,6 +3,9 @@ const Project = require("../models/Project");
 const getAllProjects = async () => {
   try {
     const allProjects = await Project.find();
+    if (allProjects.length === 0)
+      return { status: 404, message: "No projects found", data: allProjects };
+
     return {
       status: 200,
       message: "Projects found",
@@ -27,7 +30,7 @@ const getProject = (projectTag) => {
     if (!project) {
       return {
         status: 404,
-        message: "Projects found",
+        message: "No project found",
         data: null,
       };
     }
@@ -53,12 +56,14 @@ const getProjectByTag = async (projectTag) => {
     //   check if project exists
     if (!project) {
       return {
-        error: true,
+        status: 404,
+        message: "No project found",
         data: null,
       };
     }
     return {
       status: 200,
+      message: "Project found",
       data: project,
     };
   } catch (error) {
@@ -78,9 +83,10 @@ const getProjectByTag = async (projectTag) => {
 const isProjectTagTaken = async (projectTag, username) => {
   try {
     let project = await Project.findOne({ projectTag, username });
-    if (!project) return { status: 200, data: false };
+    if (!project)
+      return { status: 404, message: "Tag is available", data: false };
 
-    return { status: 200, data: true };
+    return { status: 200, message: "Tag is already in use", data: true };
   } catch (error) {
     return {
       status: 500,
@@ -95,8 +101,15 @@ const getProjectsByUser = (userID) => {
   try {
     // Fetch all projects by a single user
     const result = Project.find({ userID });
-    
-    return { status: 200, data: result };
+
+    if (result.length === 0)
+      return { status: 404, message: "No projects found", data: result };
+
+    return {
+      status: 200,
+      message: "Project found",
+      data: result,
+    };
   } catch (error) {
     return {
       status: 500,
@@ -116,6 +129,7 @@ const createProject = async (details) => {
 
     return {
       status: 200,
+      message: "Project saved successfully",
       data: project,
     };
   } catch (error) {
@@ -132,7 +146,8 @@ const createProject = async (details) => {
 // Delete a single project
 const deleteProject = async (projectTag) => {
   const project = getProjectByTag(projectTag);
-  if (project.error) return project;
+  if (!project.status === 200) return project;
+
   await project.remove();
 
   return {
@@ -144,9 +159,8 @@ const deleteProject = async (projectTag) => {
 // Add data to project
 const addEntry = async (projectTag, data) => {
   const res = await getProjectByTag(projectTag);
-  if (res.status === 404) {
-    return project;
-  }
+  if (res.status === 404) return project;
+  
   // Check entry details match the project storeSchema
   let project = res.data;
   let rightLength = project.storeSchema.length;
