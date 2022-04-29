@@ -1,14 +1,18 @@
 const mongoose = require("mongoose");
+const bcrypt = require("bcrypt");
 const Schema = mongoose.Schema;
+const uniqueValidator = require('mongoose-unique-validator');
 
 const UserSchema = new Schema({
-    userName: {
+    username: {
         type: String,
         required: true,
+        unique: true,
     },
     email: {
         type: String,
         required: true,
+        unique: true,
     },
     phone: {
         type: String,
@@ -38,7 +42,7 @@ const UserSchema = new Schema({
     confirmationCode: Number
 }, { timestamps: true});
 
-
+UserSchema.plugin(uniqueValidator);
 
 UserSchema.pre(
     'save',
