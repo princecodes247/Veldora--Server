@@ -48,7 +48,7 @@ const getUserByEmail = async (email) => {
     return {
       status: 500,
       error: true,
-      message: "Internal server error",
+      message: "Failed to check for user",
     };
   }
 };
@@ -60,7 +60,7 @@ const getAllUsers = async () => {
       return {
         status: 500,
         error: true,
-        message: "Internal server error",
+        message: "Failed to check for users",
       }
     })
     let total = await User.countDocuments();
@@ -91,7 +91,8 @@ const createUser = async (details) => {
     return {
       status: 500,
       error: true,
-      message: "Internal server error",
+      message: "User creation failed",
+      data: error
     };
   }
 };
@@ -115,7 +116,7 @@ const updateUserProjects = async (userID, data) => {
     return {
       status: 500,
       error: true,
-      message: "Internal server error",
+      message: "User projects could not be updated",
       data: error
     };
   }
@@ -136,7 +137,7 @@ const deleteUser = async (userID) => {
     return {
       status: 500,
       error: true,
-      message: "Internal server error",
+      message: "User could not be deleted",
       details: error
     };
   }
@@ -147,6 +148,7 @@ const UserService = {
   deleteUser,
   getAllUsers,
   getUser,
+  getUserByEmail,
   updateUserProjects,
 };
 
