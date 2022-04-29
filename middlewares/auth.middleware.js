@@ -5,14 +5,14 @@ const ensureAdmin = (req, res, next) => {
   res.redirect("/login");
 };
 
-const ensureAuthenticated = (req, res, next) => {
-  if (req.isAuthenticated()) {
-    return next();
-  }
-  res.redirect("/login");
-};
+// const ensureAuthenticated = (req, res, next) => {
+//   if (req.isAuthenticated()) {
+//     return next();
+//   }
+//   res.redirect("/login");
+// };
 
-() => {
+const ensureAuthenticated = (req, res, next) => {
   passport.authenticate('jwt', { session: false })
 }
 
