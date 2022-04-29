@@ -20,7 +20,7 @@ const setup = (...userObjects) => {
 describe('Velora Project Tests', () => {
     
     const user23Prince = {
-        "userName": "Prince",
+        "username": "Prince",
         "user_id": 23,
         "email": "princecodes247@gmail.com",
         "country": "Nigeria",
@@ -33,7 +33,7 @@ describe('Velora Project Tests', () => {
     // confirmationCode: Number
 
     const user20David = {
-        "userName": "David",
+        "username": "David",
         "user_id": 20,
         "email": "davidlancer@gmail.com",
         "country": "Nigeria",
