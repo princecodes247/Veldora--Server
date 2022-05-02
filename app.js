@@ -7,6 +7,7 @@ const cors = require('cors');
 const passport = require('passport');
 const session = require("express-session");
 require('dotenv').config()
+const {ensureAuthenticated, forwardAuthenticated} = require("./middlewares/auth.middleware")
 
 // DB Config
 // const db = require('./config/keys').mongoURI;
@@ -32,7 +33,7 @@ app.use(passport.session());
 
 // Route imports
 const indexRouter = require('./routes/index.route');
-// const adminRouter = require('./routes/admin.route');
+const adminRouter = require('./routes/admin.route');
 const authRouter = require('./routes/auth.route');
 const projectRouter = require('./routes/project.route');
 const userRouter = require('./routes/user.route');
@@ -42,11 +43,11 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-app.use('/auth', authRouter);
-// app.use('/admin', adminRouter);
-app.use('/api/projects', projectRouter);
-app.use('/api/users', userRouter);
-app.use('/api/*', passport.authenticate('jwt', { session: false }), indexRouter);
+app.use('/auth', forwardAuthenticated, authRouter);
+app.use('/admin', adminRouter);
+app.use('/api/projects', ensureAuthenticated, projectRouter);
+app.use('/api/users', ensureAuthenticated, userRouter);
+app.use('/api/*', indexRouter);
 app.use('/', indexRouter);
 
 module.exports = app;
