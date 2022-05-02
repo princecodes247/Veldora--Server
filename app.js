@@ -46,7 +46,7 @@ app.use('/auth', authRouter);
 // app.use('/admin', adminRouter);
 app.use('/api/projects', projectRouter);
 app.use('/api/users', userRouter);
-app.use('/api/*', indexRouter);
+app.use('/api/*', passport.authenticate('jwt', { session: false }), indexRouter);
 app.use('/', indexRouter);
 
 module.exports = app;
