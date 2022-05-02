@@ -2,8 +2,6 @@ const passport = require("passport");
 const jwt = require("jsonwebtoken");
 const UserService = require("../services/user.service");
 
-const signup = passport.authenticate("signup", { session: false });
-
 const login = async (req, user) => {
   let token = ""
   await req.login(user, { session: false }, async (error) => {
@@ -19,6 +17,6 @@ const login = async (req, user) => {
 const logout = "";
 
 module.exports = {
-  signup,
+  
   login,
 };
