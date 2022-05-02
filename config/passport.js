@@ -3,8 +3,6 @@ const LocalStrategy = require("passport-local").Strategy;
 const JWTstrategy = require("passport-jwt").Strategy;
 const ExtractJWT = require("passport-jwt").ExtractJwt;
 const bcrypt = require("bcrypt");
-// Load User Model user.js
-const User = require("../models/User");
 const UserService = require("../services/user.service");
 
 function passportConfig(passport) {
@@ -59,14 +57,21 @@ function passportConfig(passport) {
     new JWTstrategy(
       {
         secretOrKey: "TOP_SECRET",
-        jwtFromRequest: ExtractJWT.fromUrlQueryParameter("secret_token"),
+        jwtFromRequest: ExtractJWT.fromAuthHeaderAsBearerToken()
+        // jwtFromRequest: ExtractJWT.fromAuthHeader("")
+        // jwtFromRequest: ExtractJWT.fromUrlQueryParameter("secret_token"),
       },
-      async (token, done) => {
-        try {
-          return done(null, token.user);
-        } catch (error) {
-          done(error);
+      async (jwtPayload, done) => {
+        return UserService.getUser(jwtPayload.sub)
+        .then(user => 
+        {
+          console.log("JWT returned", user)
+          return done(null, user);
         }
+      ).catch(err => 
+      {
+        return done(err);
+      });
       }
     )
   );
