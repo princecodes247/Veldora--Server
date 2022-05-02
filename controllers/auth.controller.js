@@ -44,7 +44,7 @@ const signUp = async (req, res, next) => {
     });
     return;
   }
- const token = await login(req, user)
+ const token = await login(req, res, next, user)
 return res.json({
   message: "Signup successful",
   token,
