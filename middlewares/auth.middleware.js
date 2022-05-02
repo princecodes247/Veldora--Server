@@ -7,21 +7,21 @@ const ensureAdmin = (req, res, next) => {
   res.redirect("/login");
 };
 
-// const ensureAuthenticated = (req, res, next) => {
-//   if (req.isAuthenticated()) {
-//     return next();
-//   }
-//   res.redirect("/login");
-// };
-
 const ensureAuthenticated = (req, res, next) => {
-  console.log(req.isAuthenticated());
-  console.log(req.user)
-  // if (req.isAuthenticated()) {
-    //     return next();
-    //   }
-  next()
-}
+  if (req.isAuthenticated()) {
+    return next();
+  }
+  res.redirect("/login");
+};
+
+// const ensureAuthenticated = (req, res, next) => {
+//   console.log(req.isAuthenticated());
+//   console.log(req.user)
+//   // if (req.isAuthenticated()) {
+//     //     return next();
+//     //   }
+//   next()
+// }
 
 const forwardAuthenticated = (req, res, next) => {
   if (!req.isAuthenticated()) {
@@ -30,13 +30,8 @@ const forwardAuthenticated = (req, res, next) => {
   res.redirect("/dashboard");
 };
 
-const signup = passport.authenticate('signup', { session: false })
-
-const logout = ""
-
 module.exports = {
   ensureAuthenticated,
   ensureAdmin,
   forwardAuthenticated,
-  signup
 };
