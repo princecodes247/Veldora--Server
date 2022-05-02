@@ -4,7 +4,7 @@ const UserService = require("../services/user.service");
 const ensureAdmin = (req, res, next) => {
   console.log("Auth", req.isAuthenticated())
   console.log("User", req.user)
-  if (req.isAuthenticated() && req.user.level == 2) {
+  if (req.isAuthenticated() && req.user.level > 0) {
     return next();
   }
   res.status(403).json({ error: 'Not admin!' });

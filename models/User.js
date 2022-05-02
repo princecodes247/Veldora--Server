@@ -28,15 +28,14 @@ const UserSchema = new Schema({
         type: Array,
         default: []
     },
-    accountType: {
-        type: String,
-        default: "user",
+    level: {
+        type: Number,
+        default: 0,
     },   
     password: {
         type: String,
         required: true,
     },
-    role: Number,
     verified: { type: Boolean, default: false},
     proMember: { type: Boolean, default: false},
     confirmationCode: Number
