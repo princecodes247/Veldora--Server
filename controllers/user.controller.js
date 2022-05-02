@@ -7,7 +7,7 @@ const getAllUsers = async (req, res) => {
 };
 
 const getUser = async (req, res) => {
-  let { userID } = req.body;
+  let { userID } = req.params;
   let result = await UserService.getUser(userID);
   res.status(result.status).json(result);
 };
