@@ -2,10 +2,12 @@ const passport = require("passport");
 const UserService = require("../services/user.service");
 
 const ensureAdmin = (req, res, next) => {
+  console.log("Auth", req.isAuthenticated())
+  console.log("User", req.user)
   if (req.isAuthenticated() && req.user.level == 2) {
     return next();
   }
-  res.redirect("/login");
+  res.status(403).json({ error: 'Not admin!' });
 };
 
 const ensureAuthenticated = async (req, res, next) => {

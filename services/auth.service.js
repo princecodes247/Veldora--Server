@@ -7,7 +7,8 @@ const login = async (req, user) => {
   await req.login(user, { session: false }, async (error) => {
     if (error) return next(error);
 
-    const body = { _id: user.data._id, email: user.data.email };
+    const body = { _id: user._id, email: user.email };
+    console.log(body)
     token = await jwt.sign({ user: body }, "TOP_SECRET");
     console.log("req", token)
   });

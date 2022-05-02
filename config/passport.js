@@ -62,7 +62,12 @@ function passportConfig(passport) {
         // jwtFromRequest: ExtractJWT.fromUrlQueryParameter("secret_token"),
       },
       async (jwtPayload, done) => {
-        return UserService.getUser(jwtPayload.sub)
+        console.log("JWT payload", jwtPayload)
+        return UserService.getUser(jwtPayload.user._id)
+        .then(result => {
+          console.log("JWT result returned", result)
+          return result.data
+        })
         .then(user => 
         {
           console.log("JWT returned", user)

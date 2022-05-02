@@ -35,16 +35,17 @@ const signUp = async (req, res, next) => {
     return;
   }
   const { email, password, username } = req.body;
-  const user = await UserService.createUser({ email, password, username });
-  console.log(user);
-  if (user.error) {
+  const result = await UserService.createUser({ email, password, username });
+  console.log(result);
+  if (result.error) {
     res.json({
-      status: user.status,
-      message: user.data,
+      status: result.status,
+      message: result.data,
     });
     return;
   }
- const token = await login(req, res, next, user)
+  const user = result.data
+ const token = await login(req, user)
 return res.json({
   message: "Signup successful",
   token,
