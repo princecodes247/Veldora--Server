@@ -8,18 +8,13 @@ const ensureAdmin = (req, res, next) => {
   res.redirect("/login");
 };
 
-const ensureAuthenticated = (req, res, next) => {
+const ensureAuthenticated = async (req, res, next) => {
+  if (!req.headers.authorization) {
+      return res.status(403).json({ error: 'No credentials sent!' });
+    }  
+  passport.authenticate('jwt', { session: false })(req,res,next)
   
 };
-
-// const ensureAuthenticated = (req, res, next) => {
-//   console.log(req.isAuthenticated());
-//   console.log(req.user)
-//   // if (req.isAuthenticated()) {
-//     //     return next();
-//     //   }
-//   next()
-// }
 
 const forwardAuthenticated = (req, res, next) => {
   if (!req.isAuthenticated()) {
