@@ -13,7 +13,8 @@ const createUser = async (req, res) => {
       message: "Please provide all required fields",
     });
   }
-  let result = await UserService.createUser({ username, email, password });
+  const user = { username, email, password };
+  let result = await UserService.createUser(user);
   res.status(result.status).json(result);
 };
 
