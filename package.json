@@ -49,5 +49,8 @@
   "bugs": {
     "url": "https://github.com/princecodes247/Veldora--Server/issues"
   },
-  "homepage": "https://github.com/princecodes247/Veldora--Server#readme"
+  "homepage": "https://github.com/princecodes247/Veldora--Server#readme",
+  "engines": {
+    "node": "16.x"
+  }
 }
