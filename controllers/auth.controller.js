@@ -46,6 +46,14 @@ const signUp = async (req, res, next) => {
   }
   const user = result.data
  const token = await login(req, user)
+ return res
+    .cookie("access_token", token, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      // expires: dayjs().add(30, "days").toDate(),
+    })
+    .status(200)
+    .json({ message: "Signup successful 😊 👌" });
 return res.json({
   message: "Signup successful",
   token,

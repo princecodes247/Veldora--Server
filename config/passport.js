@@ -58,7 +58,7 @@ function passportConfig(passport) {
       {
         secretOrKey: process.env.JWT_SECRET || "SECRET",
         jwtFromRequest: ExtractJWT.fromAuthHeaderAsBearerToken()
-        // jwtFromRequest: ExtractJWT.fromAuthHeader("")
+        // jwtFromRequest: ExtractJWT.
         // jwtFromRequest: ExtractJWT.fromUrlQueryParameter("secret_token"),
       },
       async (jwtPayload, done) => {

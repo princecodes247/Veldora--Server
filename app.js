@@ -1,10 +1,14 @@
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
+const cookieParser = require("cookie-parser");
+
 const mongoose = require('mongoose');
 const logger = require('morgan');
 const cors = require('cors');
 const passport = require('passport');
+
+
 const session = require("express-session");
 const MongoStore = require('connect-mongo');
 require('dotenv').config()
@@ -47,6 +51,8 @@ const docsRouter = require('./routes/docs.route');
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+
+app.use(cookieParser());
 
 app.use('/auth', forwardAuthenticated, authRouter);
 app.use('/admin', ensureAuthenticated, ensureAdmin, adminRouter);
