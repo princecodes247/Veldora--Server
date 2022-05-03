@@ -6,9 +6,6 @@
   "scripts": {
     "test": "mocha",
     "start": "node index.js",
-    "build": "npm run build:prod && npm run build:dev",
-    "build:prod": "webpack --config webpack.prod.js",
-    "build:dev": "webpack --config webpack.dev.js",
     "lint": "eslint --ext .js,.jsx,.ts,.tsx src",
     "lint:fix": "eslint --ext .js,.jsx,.ts,.tsx src --fix",
     "dev": "nodemon index.js"
