@@ -14,7 +14,7 @@
     "bcrypt": "^5.0.1",
     "chai": "^4.2.0",
     "chai-http": "^4.3.0",
-    "cookie-session": "^2.0.0",
+    "connect-mongo": "^4.6.0",
     "cors": "^2.8.5",
     "debug": "~2.6.9",
     "dotenv": "^16.0.0",

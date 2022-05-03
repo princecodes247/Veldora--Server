@@ -5,13 +5,14 @@ const mongoose = require('mongoose');
 const logger = require('morgan');
 const cors = require('cors');
 const passport = require('passport');
-const session = require("cookie-session");
+const session = require("express-session");
+const MongoStore = require('connect-mongo');
 require('dotenv').config()
 const {ensureAdmin, ensureAuthenticated, forwardAuthenticated} = require("./middlewares/auth.middleware")
 // DB Config
 // const db = require('./config/keys').mongoURI;
-const connect = require('./config/dbConnection');
-connect();
+const DatabaseConnection = require('./config/dbConnection');
+DatabaseConnection.connect();
 
 
 // Passport Config
@@ -19,9 +20,12 @@ require("./config/passport")(passport);
 
 app.use(
     session({
-      secret: "secret",
+      secret: process.env.SESSION_SECRET || "SECRET",
       resave: true,
       saveUninitialized: true,
+      store: MongoStore.create({
+        mongoUrl: DatabaseConnection.dbURI()
+      })
     })
   );
   // Connect flash for flash sessions
