@@ -1,11 +1,11 @@
 const express = require("express");
 const router = express.Router();
 const UserController = require("../controllers/user.controller");
-const { ensureAuthenticated, ensureAdmin } = require("../middlewares/auth.middleware");
 
-router.get("/getAllUsers", ensureAuthenticated, ensureAdmin, UserController.getAllUsers);
-router.get("/getUser/:userID", ensureAuthenticated, ensureAdmin, UserController.getUser);
-// router.get("/createUser", ensureAuthenticated, ensureAdmin, UserController.createUser);
-router.get("/deleteUser/:userID", ensureAuthenticated, ensureAdmin, UserController.deleteUser);
+
+router.get("/getAllUsers", UserController.getAllUsers);
+router.get("/getUser/:userID", UserController.getUser);
+router.get("/createUser", UserController.createUser);
+router.get("/deleteUser/:userID", UserController.deleteUser);
 
 module.exports = router;

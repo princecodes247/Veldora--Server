@@ -7,8 +7,7 @@ const cors = require('cors');
 const passport = require('passport');
 const session = require("express-session");
 require('dotenv').config()
-const {ensureAuthenticated, forwardAuthenticated} = require("./middlewares/auth.middleware")
-
+const {ensureAdmin, ensureAuthenticated, forwardAuthenticated} = require("./middlewares/auth.middleware")
 // DB Config
 // const db = require('./config/keys').mongoURI;
 const connect = require('./config/dbConnection');
@@ -44,7 +43,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 app.use('/auth', forwardAuthenticated, authRouter);
-app.use('/admin', adminRouter);
+app.use('/admin', ensureAuthenticated, ensureAdmin, adminRouter);
 app.use('/api/projects', ensureAuthenticated, projectRouter);
 app.use('/api/users', ensureAuthenticated, userRouter);
 app.use('/api/*', indexRouter);
