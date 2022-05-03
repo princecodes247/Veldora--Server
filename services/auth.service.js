@@ -9,7 +9,7 @@ const login = async (req, user) => {
 
     const body = { _id: user._id, email: user.email };
     console.log(body)
-    token = await jwt.sign({ user: body }, "TOP_SECRET");
+    token = await jwt.sign({ user: body }, process.env.JWT_SECRET || "SECRET");
     console.log("req", token)
   });
   console.log("function", token)

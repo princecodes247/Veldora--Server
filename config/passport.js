@@ -56,7 +56,7 @@ function passportConfig(passport) {
   passport.use(
     new JWTstrategy(
       {
-        secretOrKey: "TOP_SECRET",
+        secretOrKey: process.env.JWT_SECRET || "SECRET",
         jwtFromRequest: ExtractJWT.fromAuthHeaderAsBearerToken()
         // jwtFromRequest: ExtractJWT.fromAuthHeader("")
         // jwtFromRequest: ExtractJWT.fromUrlQueryParameter("secret_token"),
