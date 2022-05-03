@@ -41,6 +41,21 @@ const getUserByEmail = async (req, res) => {
   res.status(result.status).json(result);
 };
 
+const suspendUser = async (req, res) => {
+  const { userID } = req.params;
+  const { status } = req.query
+  await UserService.getUser(userID)
+    .then(result => {
+      return result.data
+    })
+    .then(async user => {
+      user.suspended = status
+      await user.save().then(() => {
+        console.log(`User Status updated to ${user.suspended ? "Suspended" : "Active"}`)
+      })
+    })
+}
+
 const updateUserLevel = async (req, res) => {
   const { userID } = req.params;
   const { level } = req.query
@@ -62,7 +77,8 @@ const UserController = {
   getAllUsers,
   getUser,
   getUserByEmail,
-  updateUserLevel
+  suspendUser,
+  updateUserLevel,
 };
 
 module.exports = UserController;

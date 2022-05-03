@@ -37,6 +37,7 @@ const UserSchema = new Schema({
         required: true,
     },
     verified: { type: Boolean, default: false},
+    suspended: { type: Boolean, default: false},
     proMember: { type: Boolean, default: false},
     confirmationCode: Number
 }, { timestamps: true});
