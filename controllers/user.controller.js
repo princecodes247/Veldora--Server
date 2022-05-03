@@ -30,19 +30,30 @@ const getAllUsers = async (req, res) => {
 };
 
 const getUser = async (req, res) => {
-  let { userID } = req.params;
-  let result = await UserService.getUser(userID);
+  const { userID } = req.params;
+  const result = await UserService.getUser(userID);
   res.status(result.status).json(result);
 };
 
 const getUserByEmail = async (req, res) => {
-  let { email } = req.body;
-  let result = await UserService.getUserByEmail(email);
+  const { email } = req.body;
+  const result = await UserService.getUserByEmail(email);
   res.status(result.status).json(result);
 };
 
 const updateUserLevel = async (req, res) => {
-  
+  const { userID } = req.params;
+  const { level } = req.query
+  await UserService.getUser(userID)
+    .then(result => {
+      return result.data
+    })
+    .then(async user => {
+      user.level = level
+      await user.save().then(() => {
+        console.log(`User Level updated to ${level}`)
+      })
+    })
 }
 
 const UserController = {
@@ -51,6 +62,7 @@ const UserController = {
   getAllUsers,
   getUser,
   getUserByEmail,
+  updateUserLevel
 };
 
 module.exports = UserController;
