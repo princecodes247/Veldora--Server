@@ -5,7 +5,7 @@ const mongoose = require('mongoose');
 const logger = require('morgan');
 const cors = require('cors');
 const passport = require('passport');
-const session = require("express-session");
+const session = require("cookie-session");
 require('dotenv').config()
 const {ensureAdmin, ensureAuthenticated, forwardAuthenticated} = require("./middlewares/auth.middleware")
 // DB Config
