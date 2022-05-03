@@ -36,6 +36,7 @@ const adminRouter = require('./routes/admin.route');
 const authRouter = require('./routes/auth.route');
 const projectRouter = require('./routes/project.route');
 const userRouter = require('./routes/user.route');
+const docsRouter = require('./routes/docs.route');
 
 
 app.use(logger('dev'));
@@ -47,6 +48,7 @@ app.use('/admin', ensureAuthenticated, ensureAdmin, adminRouter);
 app.use('/api/projects', ensureAuthenticated, projectRouter);
 app.use('/api/users', ensureAuthenticated, userRouter);
 app.use('/api/*', indexRouter);
+app.use('/docs/*', docsRouter);
 app.use('/', indexRouter);
 
 module.exports = app;
