@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const connect = () => {
+const connect = async () => {
     let DB_URI =`mongodb://localhost:27017/veldora`;
     if (process.env.NODE_ENV === "production") {
         DB_URI = `mongodb+srv://${process.env.DB_USER}:${
@@ -13,7 +13,12 @@ const connect = () => {
     // mongoose.set("useFindAndModify", false);
     // mongoose.set("useCreateIndex", true);
     // mongoose.set("useUnifiedTopology", true);
-    mongoose.connect(DB_URI);
+    try {
+        await mongoose.connect(DB_URI);
+    } catch (error) {
+      console.log("Could not connect to database");
+      console.log(error);
+    }
 }
 
 module.exports = connect

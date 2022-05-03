@@ -13,6 +13,7 @@ const {ensureAdmin, ensureAuthenticated, forwardAuthenticated} = require("./midd
 const connect = require('./config/dbConnection');
 connect();
 
+
 // Passport Config
 require("./config/passport")(passport);
 
