@@ -6,6 +6,10 @@ router.get('/', function(req, res, next) {
   res.send('<p>Who forms the forms...</p>');
 });
 
+router.post('/waitlist', function(req, res, next) {
+  
+});
+
 // Temporary route to test email functionality
 // const sendEmail = require('../utils/sendEmail')
 // router.get('/sendEmail', function(req, res, next) {
